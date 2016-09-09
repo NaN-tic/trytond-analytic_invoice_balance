@@ -127,9 +127,11 @@ class Invoice:
                                 else:
                                     if aa2anal_line[aa_id].debit:
                                         aa2anal_line[aa_id].debit += aa_amount
-                                    elif aa2anal_line[aa_id].credit > aa_amount:
+                                    elif (aa2anal_line[aa_id].credit
+                                            > aa_amount):
                                         aa2anal_line[aa_id].credit -= aa_amount
-                                    elif aa2anal_line[aa_id].credit < aa_amount:
+                                    elif (aa2anal_line[aa_id].credit
+                                            < aa_amount):
                                         aa2anal_line[aa_id].debit = (aa_amount
                                             - aa2anal_line[aa_id].credit)
                                         aa2anal_line[aa_id].credit = Decimal(0)
@@ -140,12 +142,12 @@ class Invoice:
                                     self.get_invice_analytic_entry(
                                         line,
                                         aa_id,
-                                        aa_amount
+                                        (aa_amount
                                             if sign >= Decimal(0)
-                                            else Decimal(0),
-                                        aa_amount
+                                            else Decimal(0)),
+                                        (aa_amount
                                             if sign < Decimal(0)
-                                            else Decimal(0)))
+                                            else Decimal(0))))
                             if pending_amount == Decimal(0):
                                 break
                     analytic_lines += aa2anal_line.values()
